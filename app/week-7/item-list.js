@@ -4,11 +4,10 @@ import { useState } from "react";
 import itemData from './items.json';
 
 
-export default function ItemList() {
+export default function ItemList({items}) {
 
     const [sortBy, setSortBy] = useState("name");
     let itemArray = itemData.map((contact) => ({...contact}));
-
     itemArray.sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
 
     const handleName = (event) => {
@@ -18,6 +17,9 @@ export default function ItemList() {
     const handleCategory = (event) => {
         setSortBy("category")
     }
+
+    const clicked = "bg-purple-400 p-1 m-2 w-28 rounded"
+    const notclicked = "bg-purple-700 p-1 m-2 w-28 rounded"
 
     return(
         <main>
