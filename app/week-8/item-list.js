@@ -1,10 +1,11 @@
 "use client"
+import React from 'react';
 import Item from "./item";
 import { useState } from "react";
 import itemData from './items.json';
 
 
-export default function ItemList({items}) {
+export default function ItemList({items, onItemSelect}) {
 
     const [sortBy, setSortBy] = useState("name");
     let itemArray = itemData.map((contact) => ({...contact}));
@@ -31,7 +32,7 @@ export default function ItemList({items}) {
             </div>
             <div>
                 {itemArray.map((food, index) => (
-                <Item key={index} foodObj={food} />
+                <Item key={index} foodObj={food} onSelect={onItemSelect}/>
             ) )
             }
             </div>
