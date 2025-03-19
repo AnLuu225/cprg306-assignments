@@ -5,12 +5,16 @@ export default function MealIdeas({ ingredient }) {
     const [meals, setMeals] = useState([]);
 
     const fetchMealIdeas = async (ingredient) => {
+        const apiurl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
         try {
-            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+            const response = await fetch(apiurl);
+            if (!response.ok) {
+                throw new Error('Error fetching data from API');
+            }
             const data = await response.json();
             return data.meals || [];
         } catch (error) {
-            console.error("Error finding meals", error);
+            console.error("Error fetching data", error);
             return [];
         }
     };
@@ -39,7 +43,7 @@ export default function MealIdeas({ ingredient }) {
                     ))}
                 </ul>
             ) : (
-                <p className="text-gray-500">No meal ideas found for "{ingredient}".</p>
+                <p className="text-gray-500">No meal ideas for "{ingredient}".</p>
             )}
         </div>
     );
