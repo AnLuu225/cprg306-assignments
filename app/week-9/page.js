@@ -1,3 +1,4 @@
+"use client"
 import { useEffect } from 'react';
 // Import the useUserAuth hook
 import { useUserAuth } from "./_utils/auth-context";
